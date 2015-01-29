@@ -1,0 +1,26 @@
+graylogServer:
+  build: graylog/server
+  hostname: graylogServer
+  links:
+   - graylogMongodb:mongo
+   - graylogElasticsearch:elasticsearch
+  ports:
+   - "12900:12900"
+
+graylogWeb:
+  build: graylog/web
+  hostname: graylogWeb
+  links:
+   - graylogServer:graylog
+  ports:
+   - "9000:9000"
+
+graylogMongodb:
+  build: graylog/mongodb
+  hostname: graylogMongodb
+  mem_limit: 128m
+
+
+graylogElasticsearch:
+  build: graylog/elasticsearch
+  hostname: graylogElasticsearch
